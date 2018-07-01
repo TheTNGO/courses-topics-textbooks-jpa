@@ -35,6 +35,7 @@ public class CourseControllerTest {
 		when(courseRepo.findById(arbitraryCourseId)).thenReturn(Optional.of(course));
 		
 		underTest.findOneCourse(arbitraryCourseId, model);
+		verify(model).addAttribute("courses", course);
 	}
 	
 	
