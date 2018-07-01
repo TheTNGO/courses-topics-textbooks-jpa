@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @DataJpaTest
 public class JPAMappingsTest {
 
+	// SETUP
 	@Resource
 	private TestEntityManager entityManager;
 	
@@ -29,6 +30,10 @@ public class JPAMappingsTest {
 	@Resource
 	private CourseRepository courseRepo;
 	
+	@Resource
+	private TextBookRepository textBookRepo;
+	
+	// TESTS
 	@Test
 	public void shouldSaveAndLoadTopic() {
 		Topic topic = topicRepo.save(new Topic("topic"));
@@ -100,12 +105,38 @@ public class JPAMappingsTest {
 	@Test
 	public void shouldFindCoursesForTopicId() {
 		Topic ruby = topicRepo.save(new Topic("Ruby"));
-		Topic java = topicRepo.save(new Topic("Java"));
+		long topicId = ruby.getId();
 		
-		Course ooLanguages = courseRepo.save(new Course("OO Languages", "description", java, ruby));
-		Course advancedJava = courseRepo.save(new Course("Advanced Java", "description", java));
+		Course ooLanguages = courseRepo.save(new Course("OO Languages", "description", ruby));
 		Course advancedRuby = courseRepo.save(new Course("Advanced Ruby", "description", ruby));
 		
-		Collection<Course> coursesForTopic = courseRepo.findById(ruby.getId()); 
+		entityManager.flush(); 
+		entityManager.clear();
+		
+		Collection<Course> coursesForTopic = courseRepo.findByTopicsId(topicId); 
+		
+		assertThat(coursesForTopic, containsInAnyOrder(ooLanguages, advancedRuby));
 	}
+	
+	@Test
+	public void shouldEstablishTextBookToCourseRelationship() {
+		Course course = new Course("Course Name", "Course Description");
+		courseRepo.save(course);
+		long courseId = course.getId();
+		
+		TextBook book = new TextBook("book title", course);
+		textBookRepo.save(book);
+		
+		TextBook book2 = new TextBook("book title2", course);
+		textBookRepo.save(book2);
+		
+		entityManager.flush(); 
+		entityManager.clear();
+		
+		Optional<Course> result = courseRepo.findById(courseId);
+		course = result.get();
+		assertThat(course.getTextBooks(), containsInAnyOrder(book, book2));
+		
+	}
+	
 }

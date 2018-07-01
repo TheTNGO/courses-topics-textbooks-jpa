@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Course {
@@ -20,9 +21,12 @@ public class Course {
 	
 	@ManyToMany
 	private Collection<Topic> topics;
-
-	// Constructor
 	
+	@OneToMany(mappedBy = "course")
+	private Collection<TextBook> textBooks;
+	
+
+	// Constructors
 	public Course() { } 
 	
 	public Course(String name, String description, Topic...topics) {
@@ -45,10 +49,14 @@ public class Course {
 	}
 
 	public Collection<Topic> getTopics() {
-		
 		return topics;
 	}
-
+	
+	public Collection<TextBook> getTextBooks() {
+		// TODO Auto-generated method stub
+		return textBooks;
+	}
+	
 	// hashCode() & equals() for entity id
 	@Override
 	public int hashCode() {
@@ -71,6 +79,10 @@ public class Course {
 			return false;
 		return true;
 	}
+
+
+
+
 	
 
 	

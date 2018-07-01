@@ -8,5 +8,6 @@ public interface CourseRepository extends CrudRepository<Course, Long> {
 
 	Collection<Course> findByTopicsContains(Topic java);
 
+	Collection<Course> findByTopicsId(Long id);
 
 }
