@@ -31,7 +31,7 @@ public class JPAMappingsTest {
 	private CourseRepository courseRepo;
 	
 	@Resource
-	private TextBookRepository textBookRepo;
+	private TextbookRepository textBookRepo;
 	
 	// TESTS
 	@Test
@@ -124,10 +124,10 @@ public class JPAMappingsTest {
 		courseRepo.save(course);
 		long courseId = course.getId();
 		
-		TextBook book = new TextBook("book title", course);
+		Textbook book = new Textbook("book title", course);
 		textBookRepo.save(book);
 		
-		TextBook book2 = new TextBook("book title2", course);
+		Textbook book2 = new Textbook("book title2", course);
 		textBookRepo.save(book2);
 		
 		entityManager.flush(); 

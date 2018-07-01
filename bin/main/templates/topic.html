@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>A Single Topic]</title>
+</head>
+<body>
+		<h1> A Single Topic </h1>
+
+		<div th:each = "topic: ${topics}">
+			<p th:text = "${topic.name}"></p>
+			
+			<a href="http://localhost:8080/show-topics"> Back to Topics Home</a>
+		</div>
+
+</body>
+</html>

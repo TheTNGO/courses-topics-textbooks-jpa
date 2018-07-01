@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class TextBook {
+public class Textbook {
 
 	@Id
 	@GeneratedValue
@@ -18,9 +18,9 @@ public class TextBook {
 
 	
 	// Constructors
-	public TextBook() {}
+	public Textbook() {}
 	
-	public TextBook(String title, Course course) {
+	public Textbook(String title, Course course) {
 		this.title = title;
 		this.course = course;
 	}
@@ -55,7 +55,7 @@ public class TextBook {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TextBook other = (TextBook) obj;
+		Textbook other = (Textbook) obj;
 		if (id != other.id)
 			return false;
 		return true;

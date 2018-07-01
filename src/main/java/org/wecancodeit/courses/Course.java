@@ -23,7 +23,7 @@ public class Course {
 	private Collection<Topic> topics;
 	
 	@OneToMany(mappedBy = "course")
-	private Collection<TextBook> textBooks;
+	private Collection<Textbook> textBooks;
 	
 
 	// Constructors
@@ -52,7 +52,7 @@ public class Course {
 		return topics;
 	}
 	
-	public Collection<TextBook> getTextBooks() {
+	public Collection<Textbook> getTextBooks() {
 		// TODO Auto-generated method stub
 		return textBooks;
 	}
