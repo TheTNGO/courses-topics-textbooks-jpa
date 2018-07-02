@@ -28,7 +28,18 @@ public class CoursePopulator implements CommandLineRunner{
 		tdd = topicRepo.save(tdd);
 		
 		// Create courses
-		Course 
+		Course java101 = new Course("Intro to Java", "Learn the fundaments of Java Development", java);
+		java101 = courseRepo.save(java101);
+		Course java102 = new Course("Advanced Software Design", "Advanced Java Techniques",
+				java, tdd);
+		java102 = courseRepo.save(java102);
+		
+		// Create Textbooks
+		textbookRepo.save(new Textbook("Head First Java", java101));
+		textbookRepo.save(new Textbook("Head First Design Patterns", java102));
+		textbookRepo.save(new Textbook("Clean Code", java102));
+		textbookRepo.save(new Textbook("Intro to JPA", java102));
+		
 	}
 	
 	

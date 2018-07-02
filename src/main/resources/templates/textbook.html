@@ -7,10 +7,17 @@
 		<h1> A Single Text Book </h1>
 
 		<div th:each = "textbook: ${textbooks}">
-			<p th:text = "${textbook.title}"></p>
-			<p th:text = "${textbook.course}"></p>
-			<a href="http://localhost:8080/show-textbooks"> Back to Text Books Home</a>
+			<h2 th:text = "${textbook.title}"></h2>
 		</div>
+		<div th:each = "course: ${courses}">
+			<h2>
+				<a th:href="@{/course(id=${course.id})}" th:text = "${course.name}"></a>
+			</h2>
+		</div>
+			
+		<footer>
+			<a href="http://localhost:8080/show-textbooks"> Back to Text Books Home</a>
+		</footer>
 
 </body>
 </html>

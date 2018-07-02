@@ -53,7 +53,6 @@ public class Course {
 	}
 	
 	public Collection<Textbook> getTextBooks() {
-		// TODO Auto-generated method stub
 		return textBooks;
 	}
 	
