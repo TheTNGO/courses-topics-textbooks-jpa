@@ -102,6 +102,7 @@ public class JPAMappingsTest {
 		assertThat(coursesForTopic, containsInAnyOrder(ooLanguages, advancedJava));
 	}
 	
+	
 	@Test
 	public void shouldFindCoursesForTopicId() {
 		Topic ruby = topicRepo.save(new Topic("Ruby"));
@@ -135,8 +136,9 @@ public class JPAMappingsTest {
 		
 		Optional<Course> result = courseRepo.findById(courseId);
 		course = result.get();
-		assertThat(course.getTextBooks(), containsInAnyOrder(book, book2));
+		assertThat(course.getTextbooks(), containsInAnyOrder(book, book2));
 		
 	}
 	
+
 }

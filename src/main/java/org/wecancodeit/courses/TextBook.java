@@ -18,7 +18,7 @@ public class Textbook {
 
 	
 	// Constructors
-	public Textbook() {}
+	protected Textbook() {}
 	
 	public Textbook(String title, Course course) {
 		this.title = title;
@@ -38,7 +38,6 @@ public class Textbook {
 		return id;
 	}
 
-	// hashCode() & equals() for entity id
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,7 +59,8 @@ public class Textbook {
 			return false;
 		return true;
 	}
-	
+
+
 	
 
 }

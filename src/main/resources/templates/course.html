@@ -9,9 +9,12 @@
 		<div th:each = "course: ${courses}">
 			<p th:text = "${course.name}"></p>
 			<p th:text = "${course.description}"></p>
+			<p th:text = "${course.textbooks}"></p>
+			
 			
 		</div>
 		<div th:each = "textbook: ${textbooks}">
+			<p>Textbook(s):</p>
 			<h2>
 				<a th:href="@{/textbook(id=${textbook.id})}" th:text = "${textbook.title}"></a>
 			</h2>

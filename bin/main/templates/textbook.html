@@ -10,9 +10,10 @@
 			<h2 th:text = "${textbook.title}"></h2>
 		</div>
 		<div th:each = "course: ${courses}">
-			<h2>
+			<h2>Course or Courses Using This Textbook...</h2>
+			<h3>
 				<a th:href="@{/course(id=${course.id})}" th:text = "${course.name}"></a>
-			</h2>
+			</h3>
 		</div>
 			
 		<footer>

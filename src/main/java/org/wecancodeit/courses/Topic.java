@@ -20,7 +20,7 @@ public class Topic {
 
 	
 	// Constructors
-	public Topic() { }
+	protected Topic() { }
 	
 	public Topic(String name) {
 		this.name = name;

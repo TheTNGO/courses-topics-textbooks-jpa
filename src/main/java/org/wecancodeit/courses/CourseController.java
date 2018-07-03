@@ -26,8 +26,10 @@ public class CourseController {
 	public String findOneCourse(@RequestParam(value="id")long courseId, Model model) throws CourseNotFoundException {
 		Optional<Course> course = courseRepo.findById(courseId);
 		
+		
 		if(course.isPresent()) {
 			model.addAttribute("courses", course.get());
+			
 			return "course";
 		}
 		throw new CourseNotFoundException();
@@ -63,6 +65,7 @@ public class CourseController {
 		
 		if(textbook.isPresent()) {
 			model.addAttribute("textbooks", textbook.get());
+			model.addAttribute("courses", courseRepo.findByTextbooksContains(textbook.get()));
 			return ("textbook");
 		}
 		throw new TextBookNotFoundException();

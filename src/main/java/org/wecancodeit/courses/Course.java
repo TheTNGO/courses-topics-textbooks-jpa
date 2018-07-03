@@ -23,11 +23,11 @@ public class Course {
 	private Collection<Topic> topics;
 	
 	@OneToMany(mappedBy = "course")
-	private Collection<Textbook> textBooks;
+	private Collection<Textbook> textbooks;
 	
 
 	// Constructors
-	public Course() { } 
+	protected Course() { } 
 	
 	public Course(String name, String description, Topic...topics) {
 		this.name = name;
@@ -52,8 +52,8 @@ public class Course {
 		return topics;
 	}
 	
-	public Collection<Textbook> getTextBooks() {
-		return textBooks;
+	public Collection<Textbook> getTextbooks() {
+		return textbooks;
 	}
 	
 	// hashCode() & equals() for entity id
