@@ -26,10 +26,9 @@ public class CourseController {
 	public String findOneCourse(@RequestParam(value="id")long courseId, Model model) throws CourseNotFoundException {
 		Optional<Course> course = courseRepo.findById(courseId);
 		
-		
 		if(course.isPresent()) {
 			model.addAttribute("courses", course.get());
-			
+			model.addAttribute("textbooks",textbookRepo.findByCourseContains(course.get()));
 			return "course";
 		}
 		throw new CourseNotFoundException();
