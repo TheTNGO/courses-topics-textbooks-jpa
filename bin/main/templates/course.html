@@ -7,17 +7,23 @@
 		<h1> A Single Course </h1>
 
 		<div th:each = "course: ${courses}">
-			<p th:text = "${course.name}"></p>
+			<h2 th:text = "${course.name}"></h2>
 			<p th:text = "${course.description}"></p>
-			<p th:text = "${course.textbooks}"></p> /* Here for Testing */
 			
+			<h3> Topics Associated with this course</h3>
+			<div th:each = "topic: ${course.topics}">
+				<ul>
+					<li th:text="${topic.name}"></li>
+				</ul>
+			</div>
 			
-		</div>
-		<div th:each = "textbook: ${textbooks}">
-			<p>Textbook(s):</p>
-			<h2>
-				<a th:href="@{/textbook(id=${textbook.id})}" th:text = "${textbook.title}"></a>
-			</h2>
+			<h3> Textbooks Associated with this course</h3>
+			
+			<div th:each = "textbook: ${course.textbooks}">
+				<ul>
+					<li th:text="${textbook.title}"></li>
+				</ul>
+			</div>
 		</div>
 		<footer>
 			<a href="http://localhost:8080/show-courses"> Back to Home</a>

@@ -28,7 +28,7 @@ public class CourseController {
 		
 		if(course.isPresent()) {
 			model.addAttribute("courses", course.get());
-			model.addAttribute("textbooks",textbookRepo.findByCourseContains(course.get()));
+			// model.addAttribute("textbooks",textbookRepo.findByCourseContains(course.get()));
 			return "course";
 		}
 		throw new CourseNotFoundException();
