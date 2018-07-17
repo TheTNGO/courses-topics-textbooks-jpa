@@ -1,14 +1,18 @@
 package org.wecancodeit.courses;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import static java.lang.String.format;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Course {
@@ -19,9 +23,11 @@ public class Course {
 	private String name;
 	private String description;
 	
+	@JsonIgnore
 	@ManyToMany
 	private Collection<Topic> topics;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "course")
 	private Collection<Textbook> textbooks;
 	
@@ -54,6 +60,14 @@ public class Course {
 	
 	public Collection<Textbook> getTextbooks() {
 		return textbooks;
+	}
+	
+	public Collection<String> getTopicUrls() { 									// see the URL for topics tied into the course.
+		Collection<String> urls = new ArrayList<>();
+		for(Topic t: topics) {
+			urls.add(format("/courses/%d/topics/%s", this.getId(), t.getName().toLowerCase()));
+		}
+		return urls;
 	}
 	
 	// hashCode() & equals() for entity id

@@ -6,4 +6,7 @@ public interface TopicRepository extends CrudRepository<Topic, Long> {
 
 	Topic findByName(String topicName);
 
+	Topic findByNameIgnoreCaseLike(String topicName);
+
+
 }
