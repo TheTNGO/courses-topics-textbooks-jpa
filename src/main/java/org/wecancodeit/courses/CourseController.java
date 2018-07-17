@@ -76,5 +76,49 @@ public class CourseController {
 		return ("textbooks");
 	}
 
+	@RequestMapping("/add-course")
+	public String addCourse(String courseName, String courseDescription, String topicName) {
+		Topic topic = topicRepo.findByName(topicName);
+		Course newCourse = courseRepo.findByName(courseName);
+		
+		if(newCourse == null) {
+			newCourse = new Course(courseName, courseDescription, topic);
+			courseRepo.save(newCourse);
+		}
+		return "redirect:/show-courses";
+	}
+
+	@RequestMapping("/delete-course")
+	public String deleteCourseByName(String courseName) {
+		
+		if(courseRepo.findByName(courseName) !=null) {
+			Course deletedCourse = courseRepo.findByName(courseName);
+			courseRepo.delete(deletedCourse);
+		}
+		return "redirect:/show-courses";
+	}
+
+	@RequestMapping("/del-course")
+	public String deleteCourseById(Long courseId) {
+		
+		courseRepo.deleteById(courseId);
+
+		return "redirect:/show-courses";
+	}
+	
+	@RequestMapping("/find-by-topic")
+	public String findCoursesByTopic(String topicName, Model model) {
+		Topic topic = topicRepo.findByName(topicName);
+		model.addAttribute("courses", courseRepo.findByTopicsContains(topic));
+		
+		return "/topic";
+	}
+
+	@RequestMapping("/sort-courses")
+	public String sortCourses(Model model) {
+		model.addAttribute("courses", courseRepo.findAllByOrderByNameAsc());
+		
+		return "courses";
+	}
 	
 }

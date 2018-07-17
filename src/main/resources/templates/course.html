@@ -24,7 +24,16 @@
 					<li th:text="${textbook.title}"></li>
 				</ul>
 			</div>
+		
+		
+			<form method="POST">
+				<button type="submit" th:value="${course.id}" name="courseId" th:formaction="@{del-course}">
+					Delete
+				</button>
+			</form>
+		
 		</div>
+		
 		<footer>
 			<a href="http://localhost:8080/show-courses"> Back to Home</a>
 		</footer>
