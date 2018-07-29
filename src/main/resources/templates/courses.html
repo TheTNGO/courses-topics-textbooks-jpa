@@ -1,16 +1,86 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<title>courses</title>
 </head>
+
 <body>
 	<h1>A List of Courses</h1>
-	
+
 	<div th:each="course: ${courses}">
 		<li>
 			<a th:href="@{/course(id=${course.id})}" th:text="${course.name}"></a>
 		</li>
 	</div>
 
+	<!-- CREATE A NEW FORM WITH EACH ACTION -->
+
+	<!-- Adding Courses -->
+	<!-- method="POST" adds the form's input to the database  -->
+	<form method="POST">
+
+
+		<div>
+			<label>Enter Course Name: </label>
+			<!-- name="courseName" is tied into constructor of addCourse(..) -->
+			<!-- sends this info to the "couresName" variable in the constructor for "/add-course"-->
+			<input type="text" name="courseName" />
+		</div>
+
+		<div>
+			<label>Enter Course Description: </label>
+			<input type="text" name="courseDescription" />
+		</div>
+
+		<div>
+			<label>Enter Topic: </label>
+			<input type="text" name="topicName" />
+		</div>
+
+		<div>
+			<!-- @{add-course} is tied into RequestMapping in CourseController -->
+			<button th:formaction="@{add-course}">Add Course</button>
+		</div>
+
+	</form>
+
+	<!-- Deleting Courses -->
+	<form method="POST">
+
+		<div>
+			<label>Enter Course Name to DELETE:</label>
+			<input type="text" name="courseName" />
+		</div>
+
+		<div>
+			<button th:formaction="@{delete-course}">Delete Course</button>
+		</div>
+	</form>
+
+	<!-- Finding courses by topic -->
+	<form method="GET">
+
+		<div>
+			<label>Enter Topic Name</label>
+			<input type="text" name="topicName" />
+		</div>
+
+		<div>
+			<button th:formaction="@{/find-by-topic}">Find Courses</button>
+		</div>
+	</form>
+
+
+	<!-- Sorting courses by topic in ascending order -->
+	<form method="GET">
+
+		<div>
+			<button th:formaction="@{/sort-courses}">Sort</button>
+		</div>
+	</form>
+
+
 </body>
+
 </html>

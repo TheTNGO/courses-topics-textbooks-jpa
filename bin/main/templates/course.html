@@ -1,33 +1,50 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>A Single Course</title>
-</head>
-<body>
-		<h1> A Single Course </h1>
 
-		<div th:each = "course: ${courses}">
-			<h2 th:text = "${course.name}"></h2>
-			<p th:text = "${course.description}"></p>
-			
-			<h3> Topics Associated with this course</h3>
-			<div th:each = "topic: ${course.topics}">
-				<ul>
-					<li th:text="${topic.name}"></li>
-				</ul>
-			</div>
-			
-			<h3> Textbooks Associated with this course</h3>
-			
-			<div th:each = "textbook: ${course.textbooks}">
-				<ul>
-					<li th:text="${textbook.title}"></li>
-				</ul>
-			</div>
+<head>
+	<title>A Single Course</title>
+</head>
+
+<body>
+	<h1> A Single Course </h1>
+
+	<div th:each="course: ${courses}">
+		<h2 th:text="${course.name}"></h2>
+		<p th:text="${course.description}"></p>
+
+		<h3> Topics Associated with this course</h3>
+		<div th:each="topic: ${course.topics}">
+			<ul>
+				<li th:text="${topic.name}"></li>
+			</ul>
 		</div>
-		<footer>
-			<a href="http://localhost:8080/show-courses"> Back to Home</a>
-		</footer>
+
+		<h3> Textbooks Associated with this course</h3>
+
+		<div th:each="textbook: ${course.textbooks}">
+			<ul>
+				<li th:text="${textbook.title}"></li>
+			</ul>
+		</div>
+
+		<!-- Forms -->
+		<!-- Delete current course form -->
+		<!-- Form needs to be within element that actually references Course entities -->
+		<form method="POST">
+			<!-- "th:value" hits on the actual entity ID (this entity) -->
+			<!-- "th:formaction" corresponds to the "/del-course" RequestMapping in the controller -->
+			<!-- "name" attr corresponds to parameter set by deleteCourseById(...) in controller  -->
+			<button type="submit" th:value="${course.id}" name="courseId" th:formaction="@{del-course}">Delete this course</button>
+		</form>
+
+	</div>
+
+
+
+	<footer>
+		<a href="http://localhost:8080/show-courses"> Back to Home</a>
+	</footer>
 
 </body>
+
 </html>
