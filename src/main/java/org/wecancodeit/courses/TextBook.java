@@ -1,9 +1,14 @@
 package org.wecancodeit.courses;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Textbook {
@@ -13,6 +18,7 @@ public class Textbook {
 	private long id;
 	private String title;
 	
+	@JsonIgnore // helps with making sure that JSON objects don't repeat themselves in HTML Template
 	@ManyToOne
 	private Course course;
 

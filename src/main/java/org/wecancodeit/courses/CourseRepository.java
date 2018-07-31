@@ -20,4 +20,6 @@ public interface CourseRepository extends CrudRepository<Course, Long> {
 
 	Collection<Course> findAllByOrderByNameAsc();
 
+	Course findByNameIgnoreCaseLike(String courseName);
+
 }

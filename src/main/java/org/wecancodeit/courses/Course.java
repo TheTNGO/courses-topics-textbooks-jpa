@@ -1,5 +1,6 @@
 package org.wecancodeit.courses;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import static java.lang.String.format;
+
+
 @Entity
 public class Course {
 
@@ -19,9 +25,11 @@ public class Course {
 	private String name;
 	private String description;
 	
+	@JsonIgnore // helps with making sure that JSON objects don't repeat themselves in HTML Template
 	@ManyToMany
 	private Collection<Topic> topics;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "course")
 	private Collection<Textbook> textbooks;
 	
@@ -55,6 +63,27 @@ public class Course {
 	public Collection<Textbook> getTextbooks() {
 		return textbooks;
 	}
+	
+	/*Rest Controller */
+	// putting Topic URLS in Course JSON objects
+	// tied with "topics" collection
+	public Collection<String> getTopicsUrls(){
+		Collection<String> urls = new ArrayList<>();
+		
+		// for each topic in our "topics" collection, find the id of the course, and get the URL of the topic (object)
+		for (Topic t: topics) {	// tied into topics collection that is part of this entity
+			
+			urls.add(format("/courses/%d/topics/%s", this.getId(), t.getName().toLowerCase()));// format - %d is a number/digit based variable (int, long)
+																							// %s is a String based variable
+																							// variables being thrown in must be specified with commas in argument IN ORDER
+		}
+		
+		return urls;
+		
+	}
+	
+	
+	/* END Rest Controller */
 	
 	// hashCode() & equals() for entity id
 	@Override

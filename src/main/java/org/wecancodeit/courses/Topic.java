@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Topic {
@@ -15,7 +16,8 @@ public class Topic {
 	private long id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "topics")
+	@JsonIgnore
+	@ManyToMany(mappedBy = "topics") 
 	private Collection<Course> courses;
 
 	
